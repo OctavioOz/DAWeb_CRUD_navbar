@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+{% load static %}
+<div class="row"> <!--la fila-->
+
+    <div class="col sm-12 col-md-4 col-lg-4 col-xl-4"> <!--Columna izquierda--> 
+        <h1>Registro de clientes</h1>
+        <div class="card"> <!--la tarjeta-->
+            <div class="card-body">
+                <form action="registrarclientes/" method="POST"> {% csrf_token %} <!--falta accion-->
+                    
+                    <div class="form-growup">
+                        <input type="text" id="txtid" class="form-control" name="txtid" placeholder="Id clientes" minlength="1" maxlength="6" required>
+                    </div>
+
+                    <div class="form-growup py-3">
+                        <input type="text" id="txtnombre" class="form-control" name="txtnombre" placeholder="Nombre clientes" maxlength="100" required>
+                    </div>
+
+                    <div class="form-growup py-2">
+                        <input type="text" id="txtmetodo_p" class="form-control" name="txtmetodo_p" placeholder="Metodo de Pago"  min="1" max="9" required>
+                    </div>
+
+                    <div class="form-growup py-2">
+                        <input type="text" id="txttipo_cort" class="form-control" name="txttipo_cort" placeholder="Tipo de Corte"  min="1" max="9" required>
+                    </div>
+
+                    <div class="form-growup py-2">
+                        <input type="text" id="txttipo_cab" class="form-control" name="txttipo_cab" placeholder="Tipo de Cabello"  min="1" max="9" required>
+                    </div>
+
+                    <div class="form-growup py-2">
+                        <input type="text" id="txtfecha_nc" class="form-control" name="txtfecha_nc" placeholder="Fecha Nacimiento"  min="1" max="9" required>
+                    </div>
+
+                    <div class="form-growup py-1">
+                        <button type="submit" class="btn btn-dark">Guardar clientes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> <!--Columna izquierda--> 
+
+<div class="col"> <!--Columna derecha-->
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <h1>Listado de clientess</h1>
+        <img class="w-50" src="{% static "img/clientes.jpg" %}" alt="ozaeta" width="400" height="">
+        <!--la tabla-->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id clientes</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Metodo Pago</th>
+                    <th scope="col">Tipo Corte</th>
+                    <th scope="col">Tipo Cabello</th>
+                    <th scope="col">Fecha Nacimiento</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            {% for m in misclientes %}
+            
+            <tr>
+                <td> {{m.id}} </td>
+                <td> {{m.nombre}} </td>
+                <td> {{m.metodo_p}} </td>
+                <td> {{m.tipo_cort}} </td>
+                <td> {{m.tipo_cab}} </td>
+                <td> {{m.fecha_nc}} </td>
+                <td> <a href="seleccionarclientes/{{m.id}}" class="btn btn-info" >Editar</a></td>  <!--falta-->
+                <td> <a href="borrarclientes/{{m.id}}" class="btn btn-danger">Borrar</a></td> <!--falta-->
+            </tr>    
+            
+            {% endfor %}
+
+        </tbody>
+        </table>
+
+    </div>
+
+</div> <!--Columna derecha-->
+
+</div> <!--la fila-->
+{% endblock %}

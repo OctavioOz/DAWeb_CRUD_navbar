@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+{% load static %}
+<div class="row"> <!--la fila-->
+
+    <div class="col sm-12 col-md-4 col-lg-4 col-xl-4"> <!--Columna izquierda--> 
+        <h1>Registro de citas</h1>
+        <div class="card"> <!--la tarjeta-->
+            <div class="card-body">
+                <form action="registrarcitas/" method="POST"> {% csrf_token %} <!--falta accion-->
+                    <div class="form-growup">
+                        <input type="text" id="numid_cita" class="form-control" name="numid_cita" placeholder="Id Cita" minlength="1" maxlength="6" required>
+                    </div>
+
+                    <div class="form-growup py-3">
+                        <input type="text" id="numid_cliente" class="form-control" name="numid_cliente" placeholder="Id Cliente" maxlength="100" required>
+                    </div>
+
+                    <div class="form-growup py-2">
+                        <input type="text" id="numid_trabajador" class="form-control" name="numid_trabajador" placeholder="Id Trabajador"  min="1" max="9" required>
+                    </div>
+
+                    <div class="form-growup py-2">
+                        <input type="text" id="numid_corte" class="form-control" name="numid_corte" placeholder="Id corte"  min="1" max="9" required>
+                    </div>
+
+                    <div class="form-growup py-2">
+                        <input type="text" id="txtfecha_cita" class="form-control" name="txtfecha_cita" placeholder="Fecha Cita"  min="1" max="9" required>
+                    </div>
+
+                    <div class="form-growup py-2">
+                        <input type="text" id="txttotal" class="form-control" name="txttotal" placeholder="Total"  min="1" max="9" required>
+                    </div>
+
+                    <div class="form-growup py-1">
+                        <button type="submit" class="btn btn-dark">Guardar cita</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> <!--Columna izquierda--> 
+
+<div class="col"> <!--Columna derecha-->
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <h1>Listado de citas</h1>
+        <img class="w-50" src="{% static "img/citas.jpg" %}" alt="ozaeta" width="400" height="">
+        <!--la tabla-->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id cita</th>
+                    <th scope="col">Id Cliente</th>
+                    <th scope="col">Id Trabajador</th>
+                    <th scope="col">Id Corte</th>
+                    <th scope="col">Fecha Cita</th>
+                    <th scope="col">Total</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            {% for m in miscitas %}
+            
+            <tr>
+                <td> {{m.id_cita}} </td>
+                <td> {{m.id_cliente}} </td>
+                <td> {{m.id_trabajador}} </td>
+                <td> {{m.id_corte}} </td>
+                <td> {{m.fecha_cita}} </td>
+                <td> {{m.total}} </td>
+                <td> <a href="seleccionarcitas/{{m.id_cita}}" class="btn btn-info" >Editar</a></td>  <!--falta-->
+                <td> <a href="borrarcitas/{{m.id_cita}}" class="btn btn-danger">Borrar</a></td> <!--falta-->
+            </tr>    
+            
+            {% endfor %}
+
+        </tbody>
+        </table>
+
+    </div>
+
+</div> <!--Columna derecha-->
+
+</div> <!--la fila-->
+{% endblock %}
