@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+{% load static %}
+<div class="row"> <!--la fila-->
+
+    <div class="col sm-12 col-md-4 col-lg-4 col-xl-4"> <!--Columna izquierda--> 
+        <h1>Registro de Trabajadores</h1>
+        <div class="card"> <!--la tarjeta-->
+            <div class="card-body">
+                <form action="registrartrabajadores/" method="POST"> {% csrf_token %} <!--falta accion-->
+                    <div class="form-growup">
+                        <input type="text" id="txtid" class="form-control" name="txtid" placeholder="Id Trabajadores" minlength="1" maxlength="6" required>
+                    </div>
+
+                    <div class="form-growup py-3">
+                        <input type="text" id="txtnombre" class="form-control" name="txtnombre" placeholder="Nombre Trabajadores" maxlength="100" required>
+                    </div>
+
+                    <div class="form-growup py-2">
+                        <input type="text" id="txtapellido" class="form-control" name="txtapellido" placeholder="Apellido Trabajadores"  min="1" max="9" required>
+                    </div>
+
+                    <div class="form-growup py-2">
+                        <input type="text" id="txtnum_telefono" class="form-control" name="txtnum_telefono" placeholder="Num. Telefono"  min="1" max="9" required>
+                    </div>
+
+                    <div class="form-growup py-2">
+                        <input type="text" id="txtdireccion" class="form-control" name="txtdireccion" placeholder="Direccion"  min="1" max="9" required>
+                    </div>
+
+                    <div class="form-growup py-2">
+                        <input type="text" id="txtfecha_ne" class="form-control" name="txtfecha_ne" placeholder="Fecha Nacimiento"  min="1" max="9" required>
+                    </div>
+
+                    <div class="form-growup py-2">
+                        <input type="text" id="txtfecha_ing" class="form-control" name="txtfecha_ing" placeholder="Fecha Ingreso"  min="1" max="9" required>
+                    </div>
+
+                    <div class="form-growup py-1">
+                        <button type="submit" class="btn btn-dark">Guardar Trabajadores</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> <!--Columna izquierda--> 
+
+<div class="col"> <!--Columna derecha-->
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <h1>Listado de trabajadoress</h1>
+        <img class="w-50" src="{% static "img/trabajadores.jpg" %}" alt="ozaeta" width="400" height="">
+        <!--la tabla-->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id Trabajadores</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Num. Telefono</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Fecha Nacimiento</th>
+                    <th scope="col">Fecha Ingreso</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            {% for m in mistrabajadores %}
+            
+            <tr>
+                <td> {{m.id}} </td>
+                <td> {{m.nombre}} </td>
+                <td> {{m.apellido}} </td>
+                <td> {{m.num_telefono}} </td>
+                <td> {{m.direccion}} </td>
+                <td> {{m.fecha_ne}} </td>
+                <td> {{m.fecha_ing}} </td>
+                <td> <a href="seleccionartrabajadores/{{m.id}}" class="btn btn-info" >Editar</a></td>  <!--falta-->
+                <td> <a href="borrartrabajadores/{{m.id}}" class="btn btn-danger">Borrar</a></td> <!--falta-->
+            </tr>    
+            
+            {% endfor %}
+
+        </tbody>
+        </table>
+
+    </div>
+
+</div> <!--Columna derecha-->
+
+</div> <!--la fila-->
+{% endblock %}
