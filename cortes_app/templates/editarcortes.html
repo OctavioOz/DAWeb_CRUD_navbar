@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row"> <!--fila en editar-->
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Cortes</h2>
+
+        <!--Aqui codigo tarjeta-->
+        <div class="card"> <!--la tarjeta-->
+            <div class="card-body">
+                <form action="/editarcortes/" method="POST"> {% csrf_token %} <!--falta accion-->
+                    <div class="form-growup">
+                        <input type="text" id="numid_corte" class="form-control" name="numid_corte" value="{{miscortes.id_corte}}" minlength="1" maxlength="6" required>
+                    </div>
+
+                    <div class="form-growup py-3">
+                        <input type="text" id="txtnombre_corte" class="form-control" name="txtnombre_corte" value="{{miscortes.nombre_corte}}" maxlength="100" required>
+                    </div>
+
+                    <div class="form-growup py-2">
+                        <input type="text" id="txttipo_corte" class="form-control" name="txttipo_corte" value="{{miscortes.tipo_corte}}"  min="1" max="9" required>
+                    </div>
+
+                    <div class="form-growup py-2">
+                        <input type="text" id="numprecio" class="form-control" name="numprecio" value="{{miscortes.precio}}" min="1" max="9" required>
+                    </div>
+                    <div class="form-growup py-1">
+                        <button type="submit" class="btn btn-dark">Guardar Cortes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--Aqui codigo tarjeta-->
+    </div>
+</div> <!--fila en editar-->
+
+
+{% endblock %}
